@@ -1,9 +1,8 @@
 <script setup>
-import Logo from '../assets/Logo.svg'
 import animationVideo from '../assets/0a61daabaac3bc985419738ca25ba823b3fd350e.gif.mp4'
 </script>
 <template>
-  <main class="features">
+  <section class="features">
     <div class="detailed-information">
       <div>
         <div class="di-1">4000+</div>
@@ -32,7 +31,7 @@ import animationVideo from '../assets/0a61daabaac3bc985419738ca25ba823b3fd350e.g
         <!--img :src="Logo" alt="Логотип" class="logo" /-->
       </video>
     </div>
-  </main>
+  </section>
 </template>
 
 <style scoped>
@@ -70,6 +69,8 @@ import animationVideo from '../assets/0a61daabaac3bc985419738ca25ba823b3fd350e.g
 }
 .video-wrapper {
   flex-grow: 1; /* занимает всё оставшееся место */
+  border-radius: 32px;
+  overflow: hidden;
 }
 .animation {
   width: 100%;

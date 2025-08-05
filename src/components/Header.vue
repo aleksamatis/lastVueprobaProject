@@ -1,66 +1,105 @@
 <script setup>
 import Logo from '../assets/Logo.svg'
-import background from '../assets/background.png'
-import element from '../assets/element.svg'
 import majesticons_arrow from '../assets/majesticons_arrow.svg'
+import Menu from '@/components/Menu.vue'
 </script>
 <template>
-  <header class="header" :style="{ backgroundImage: `url(${background})` }">
+  <header class="header">
+    <img src="@/assets/background.png" alt="Background" class="header-background" />
     <div class="menu">
-      <img :src="Logo" alt="Логотип" class="logo" />
-      <div>Программное обеспечение</div>
-      <div>О компании</div>
-      <div>Контакты</div>
-      <button class="menu-btn">Заказать</button>
-    </div>
-    <div class="header-item">
-      <div class="text-logo">EN SOFT</div>
-      <div>
-        Текст-рыба получите доступ к встроенным продуктам для настройки аппаратной конфигурации и
-        создания прикладных программ
+      <div class="menu-container container">
+        <div class="flex">
+          <img :src="Logo" alt="Логотип" class="logo" />
+          <Menu />
+        </div>
+        <button class="menu-btn">Заказать</button>
       </div>
     </div>
-    <img :src="element" class="cut-element" />
-    <img :src="majesticons_arrow" class="cut-element-arrow" />
+    <div class="container">
+      <div class="header-item">
+        <div class="text-logo">EN SOFT</div>
+        <div>
+          Текст-рыба получите доступ к встроенным продуктам для настройки аппаратной конфигурации и
+          создания прикладных программ
+        </div>
+      </div>
+    </div>
+    <a class="about-us-link" href="#about">
+      <div>О нас</div>
+      <img :src="majesticons_arrow" class="cut-element-arrow" />
+    </a>
   </header>
 </template>
 
 <style scoped>
 .header {
-  height: 600px; /* или больше, как нужно */
+  height: 100vh;
+  min-height: 400px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+  background-color: rgba(43, 83, 163, 1);
 }
+
+.header-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0px;
+
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 76.58%),
+    url(@/assets/background.png);
+  border-radius: 0px 0px 34px 34px;
+  mix-blend-mode: normal;
+  opacity: 0.4;
+  backdrop-filter: blur(12px);
+}
+
 .menu {
+  background: rgba(15, 54, 131, 0.24);
+  backdrop-filter: blur(12px);
+}
+
+.menu-container {
   display: flex;
-  background-color: rgba(243, 243, 243, 0.8); /* светло-серый с прозрачностью */
+
   gap: 20px;
   align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
 }
+
+.logo {
+  margin-right: 80px;
+}
+
 .menu-btn {
-  background-color: #092efc;
   color: white;
-  border-radius: 12px;
-  padding: 32px 15px;
 }
 
 .menu > button {
   margin-left: auto;
 }
 
-.menu > div {
-  cursor: pointer;
-}
-
 .header-item {
-  background-color: black;
+  position: absolute;
   color: white;
-  margin-top: 50px;
-  max-width: 500px;
-  padding: 15px;
+  top: 50%;
+  max-width: 734px;
+  padding: 120px 24px 24px 24px;
   box-sizing: border-box;
+  border-radius: 34px;
+
+  background:
+    linear-gradient(0deg, rgba(25, 25, 61, 0.4), rgba(25, 25, 61, 0.4)),
+    linear-gradient(312.56deg, rgba(0, 0, 0, 0.3) 0%, rgba(36, 84, 91, 0.3) 100%);
+
+  box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.15) inset;
+
+  backdrop-filter: blur(28px);
 }
 .text-logo {
   font-weight: 700;
@@ -69,21 +108,36 @@ import majesticons_arrow from '../assets/majesticons_arrow.svg'
   line-height: 53px;
   letter-spacing: 2px;
   text-transform: uppercase;
+
+  background: linear-gradient(90deg, #ffffff 0%, #1a22d3 39.05%);
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 24px;
 }
 
-.cut-element {
+.about-us-link {
   position: absolute;
+  background-image: url('@/assets/element.svg');
+  width: 177px;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.about-us-link,
+.about-us-link:hover a {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  padding-top: 9px;
+  line-height: 1;
 }
 
 .cut-element-arrow {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
+  width: 24px;
+  height: 18px;
 }
 </style>

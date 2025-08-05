@@ -1,5 +1,5 @@
 <template>
-  <main class="main">
+  <section class="main container" id="about">
     <h2>О КОМПАНИИ</h2>
     <p>
       Значимость этих проблем настолько очевидна, что консультация с профессионалами из IT позволяет
@@ -12,10 +12,13 @@
       образом, новая модель организационной деятельности создаёт предпосылки качественно новых шагов
       для направлений прогрессивного развития.
     </p>
-  </main>
+    <Features />
+  </section>
 </template>
 
-<script setup></script>
+<script setup>
+import Features from '@/components/Features.vue'
+</script>
 
 <style scoped>
 .main {

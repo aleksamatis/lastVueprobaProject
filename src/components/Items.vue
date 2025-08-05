@@ -27,25 +27,34 @@ const items = [
 </script>
 
 <template>
-  <main class="main">
-    <div class="detailed-items">
+  <section class="main">
+    <div class="detailed-items container">
       <div v-for="(item, index) in items" :key="index" class="di-1">
         <img :src="item.picture" alt="Item image" />
-        <div>{{ item.title }}</div>
-        <div>{{ item.description }}</div>
-        <button class="btn">{{ item.buttonText }}</button>
+        <div class="item-content">
+          <h3>{{ item.title }}</h3>
+          <div class="mb-xl">{{ item.description }}</div>
+          <button class="btn">{{ item.buttonText }}</button>
+        </div>
       </div>
     </div>
-  </main>
+  </section>
 </template>
 
 <style scoped>
 .main {
-  padding: 20px;
+  border-radius: 34px;
+  padding-top: 80px;
+  padding-right: 304px;
+  padding-bottom: 80px;
+  padding-left: 304px;
+
+  background: linear-gradient(180deg, #4050aa 0%, #0f1a58 100%);
 }
 
 .detailed-items {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
 }
 
@@ -53,29 +62,23 @@ const items = [
   width: 100%;
   height: auto;
   display: block;
+  margin-bottom: -24px;
+}
+
+.item-content {
+  padding: 24px;
+  background: rgba(32, 35, 67, 1);
+  border-radius: 24px;
+  color: white;
 }
 
 .di-1 {
-  max-width: 300px;
-  padding: 10px;
   box-sizing: border-box;
-  background-color: #373951;
   color: white;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-
-.btn {
-  padding: 8px 16px;
-  border: none;
-  background-color: #092efc;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 4px;
-  align-self: flex-start; /* чтобы кнопка была слева */
-  transition: background-color 0.3s;
+  border-radius: 24px;
+  overflow: hidden;
 }
 
 .btn:hover {
