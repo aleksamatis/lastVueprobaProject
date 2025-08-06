@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* Global CSS Variables */
 :root {
   /* Colors */
@@ -11,7 +13,8 @@
 
   /* Typography */
   --font-family-base:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    Montserrat, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
   --font-size-base: 16px;
   --line-height-base: 1.5;
 
@@ -123,7 +126,7 @@ button {
   border: none;
   padding: 15px 32px;
   color: #fff;
-  border-radius: var(--border-radius);
+  border-radius: 12px;
   transition: var(--transition-base);
   background-color: var(--primary-color);
 }
@@ -155,6 +158,27 @@ select:focus {
 .container {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+@media (max-width: 1440px) {
+  .container {
+    padding-left: 72px;
+    padding-right: 72px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 36px;
+    padding-right: 36px;
+  }
+}
+
+@media (max-width: 376px) {
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
 }
 
 .text-center {

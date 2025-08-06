@@ -1,5 +1,5 @@
 <template>
-  <div class="contact-form-wrapper">
+  <div class="contact-form-wrapper container">
     <div class="contact-image">
       <img src="@/assets/mail-icon.png" alt="Mail Icon" />
     </div>
@@ -11,13 +11,12 @@
       </p>
 
       <form @submit.prevent="handleSubmit">
-        <input v-model="form.name" type="text" placeholder="Имя фамилия" />
-        <span v-if="errors.name" class="error">{{ errors.name }}</span>
+        <TextInput v-model:value="form.name" type="text" label="Имя фамилия" :error="errors.name" />
+        <TextInput v-model:value="form.email" type="email" label="Email" :error="errors.email" />
 
-        <input v-model="form.email" type="email" placeholder="Email" />
-        <span v-if="errors.email" class="error">{{ errors.email }}</span>
-
-        <button type="submit">Отправить</button>
+        <div>
+          <button type="submit" class="submit-button">Отправить</button>
+        </div>
       </form>
 
       <div class="stats">
@@ -34,44 +33,52 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'ContactForm',
-  data() {
-    return {
-      form: {
-        name: '',
-        email: '',
-      },
-      errors: {},
-    }
-  },
-  methods: {
-    validateEmail(email) {
-      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      return re.test(email)
-    },
-    handleSubmit() {
-      this.errors = {}
+<script lang="ts" setup>
+import { reactive } from 'vue'
+import TextInput from '@/components/TextInput.vue'
 
-      if (!this.form.name.trim()) {
-        this.errors.name = 'Введите имя и фамилию'
-      }
+interface FormData {
+  name: string
+  email: string
+}
 
-      if (!this.form.email.trim()) {
-        this.errors.email = 'Введите email'
-      } else if (!this.validateEmail(this.form.email)) {
-        this.errors.email = 'Неверный формат email'
-      }
+interface FormErrors {
+  name?: string
+  email?: string
+}
 
-      if (Object.keys(this.errors).length === 0) {
-        alert('Форма отправлена!')
-        // Здесь можно отправить данные на сервер
-        this.form.name = ''
-        this.form.email = ''
-      }
-    },
-  },
+const form = reactive<FormData>({
+  name: '',
+  email: '',
+})
+
+const errors = reactive<FormErrors>({})
+
+const validateEmail = (email: string): boolean => {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return re.test(email)
+}
+
+const handleSubmit = (): void => {
+  // Clear previous errors
+  Object.keys(errors).forEach((key) => delete errors[key as keyof FormErrors])
+
+  if (!form.name.trim()) {
+    errors.name = 'Введите имя и фамилию'
+  }
+
+  if (!form.email.trim()) {
+    errors.email = 'Введите email'
+  } else if (!validateEmail(form.email)) {
+    errors.email = 'Неверный формат email'
+  }
+
+  if (Object.keys(errors).length === 0) {
+    alert('Форма отправлена!')
+    // Здесь можно отправить данные на сервер
+    form.name = ''
+    form.email = ''
+  }
 }
 </script>
 
@@ -80,11 +87,15 @@ export default {
   display: flex;
   gap: 40px;
   align-items: flex-start;
-  padding: 40px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.contact-form-wrapper > * {
+  flex: 1 1;
 }
 
 .contact-image img {
-  max-width: 300px;
   height: auto;
 }
 
@@ -108,7 +119,7 @@ input {
   border-radius: 4px;
 }
 
-button {
+.submit-button {
   background-color: #0057ff;
   color: white;
   padding: 10px;
@@ -116,15 +127,15 @@ button {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  padding-top: 12px;
+  padding-right: 54px;
+  padding-bottom: 12px;
+  padding-left: 54px;
+  margin-top: 40px;
 }
 
-button:hover {
+.submit-button:hover {
   background-color: #0042c1;
-}
-
-.error {
-  color: red;
-  font-size: 0.85rem;
 }
 
 .stats {
@@ -141,5 +152,21 @@ button:hover {
   margin: 4px 0 0;
   font-size: 0.9rem;
   color: #555;
+}
+
+@media screen and (max-width: 768px) {
+  .contact-form-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-image {
+    margin-bottom: 20px;
+  }
+
+  .stats {
+    flex-direction: column;
+    align-items: start;
+  }
 }
 </style>

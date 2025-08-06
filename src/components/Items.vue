@@ -45,10 +45,7 @@ const items = [
 .main {
   border-radius: 34px;
   padding-top: 80px;
-  padding-right: 304px;
   padding-bottom: 80px;
-  padding-left: 304px;
-
   background: linear-gradient(180deg, #4050aa 0%, #0f1a58 100%);
 }
 
@@ -83,5 +80,21 @@ const items = [
 
 .btn:hover {
   background-color: #071dbb;
+}
+
+@media screen and (max-width: 1280px) {
+  .detailed-items {
+    grid-template-columns: 1fr 1fr;
+    max-width: 100%;
+    row-gap: 40px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .detailed-items {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    row-gap: 40px;
+  }
 }
 </style>

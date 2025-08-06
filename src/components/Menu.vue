@@ -1,28 +1,43 @@
 <template>
   <nav class="flex menu">
     <!-- Бургер для мобильных -->
-    <button class="burger" @click="$emit('toggle-menu')" aria-label="Toggle menu">
+    <button class="burger" @click="open = !open" aria-label="Toggle menu">
       <span></span>
       <span></span>
       <span></span>
     </button>
 
     <!-- Основное меню: скрываем на мобильных, показываем при isOpen -->
-    <div class="menu-items" :class="{ open: isOpen }">
+    <div class="menu-items" :class="{ open: open }">
       <div
-        class="menu-item"
-        @mouseenter="!isMobile && (open = true)"
-        @mouseleave="!isMobile && (open = false)"
-        @click="isMobile && (open = !open)"
+        class="menu-item-wrapper"
+        @mouseenter="!isMobile && (submenuOpen = true)"
+        @mouseleave="!isMobile && (submenuOpen = false)"
       >
-        Программное обеспечение
-        <span class="arrow" :class="{ open: open }">▼</span>
+        <div class="menu-item" @click="isMobile && (submenuOpen = !submenuOpen)">
+          <div class="flex items-center" :class="{ open: submenuOpen }">
+            Программное обеспечение
+            <inline-svg
+              class="arrow"
+              src="@/assets/majesticons_arrow.svg"
+              :width="24"
+              height="24 "
+            />
+          </div>
+        </div>
 
         <!-- Подменю для мобилки и десктопа -->
-        <div v-show="open" class="dropdown">
-          <div class="dropdown-item">Подпункт 1</div>
-          <div class="dropdown-item">Подпункт 2</div>
-          <div class="dropdown-item">Подпункт 3</div>
+        <div v-show="submenuOpen" class="dropdown">
+          <div class="dropdown-item">EN-Safety suite</div>
+          <div class="dropdown-item">EN-Soft Advance Alarm Managment</div>
+          <div class="dropdown-item">EN-Soft AMS</div>
+          <div class="dropdown-item">EN-Soft Batch</div>
+          <div class="dropdown-item">EN-Soft CHAMS</div>
+          <div class="dropdown-item">EN-Soft EPG DCG</div>
+          <div class="dropdown-item">EN-Soft Gaz Turbine Control</div>
+          <div class="dropdown-item">EN-Soft Process Control</div>
+          <div class="dropdown-item">EN-Soft Report Analysis</div>
+          <div class="dropdown-item">EN-Soft SOE</div>
         </div>
       </div>
 
@@ -30,41 +45,37 @@
       <div class="menu-item">Контакты</div>
 
       <!-- Отдельная кнопка Заказать на мобильных, после Контактов -->
-      <button v-if="isMobile && isOpen" class="order-button" @click="order">Заказать</button>
+      <button v-if="isMobile && open" class="order-button" @click="order">Заказать</button>
     </div>
   </nav>
 </template>
 
-<script>
-export default {
-  props: {
-    isOpen: Boolean,
-  },
-  data() {
-    return {
-      open: false,
-      isMobile: false,
-    }
-  },
-  mounted() {
-    this.checkIsMobile()
-    window.addEventListener('resize', this.checkIsMobile)
-  },
-  beforeUnmount() {
-    window.removeEventListener('resize', this.checkIsMobile)
-  },
-  methods: {
-    checkIsMobile() {
-      this.isMobile = window.innerWidth <= 768
-      if (!this.isMobile) {
-        this.open = false
-      }
-    },
-    order() {
-      alert('Заказ оформлен!')
-    },
-  },
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+
+const open = ref<boolean>(true)
+const submenuOpen = ref<boolean>(false)
+const isMobile = ref<boolean>(false)
+
+const checkIsMobile = (): void => {
+  isMobile.value = window.innerWidth <= 768
+  if (!isMobile.value) {
+    open.value = false
+  }
 }
+
+const order = (): void => {
+  alert('Заказ оформлен!')
+}
+
+onMounted(() => {
+  checkIsMobile()
+  window.addEventListener('resize', checkIsMobile)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkIsMobile)
+})
 </script>
 
 <style scoped>
@@ -75,6 +86,7 @@ export default {
   color: #fff;
   font-family: 'Inter', sans-serif;
   position: relative;
+  z-index: 10;
 }
 
 .burger {
@@ -113,12 +125,19 @@ export default {
     right: 0;
     width: 360px;
     max-width: 90vw;
-    background: rgba(0, 0, 0, 0.95);
     flex-direction: column;
     padding: 16px 0;
-    border-radius: 0 0 12px 12px;
+    border-radius: 12px;
     z-index: 20;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    align-items: start;
+
+    background: rgba(42, 40, 65, 0.7);
+    backdrop-filter: blur(26px);
+    -webkit-backdrop-filter: blur(26px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 16px;
+    z-index: 1000;
+    transform: translateZ(0);
   }
 
   .menu-items.open {
@@ -131,24 +150,23 @@ export default {
     position: relative;
   }
 
-  .arrow {
-    display: inline-block;
-    margin-left: 8px;
-    transition: transform 0.3s ease;
-    font-size: 12px;
-    user-select: none;
-  }
-
-  .arrow.open {
-    transform: rotate(180deg);
+  .menu-item:hover {
+    background: none !important;
   }
 
   .dropdown {
     /* Сделаем раскрывающееся меню внутри потока, чтобы сдвигать контент вниз */
-    padding-left: 16px;
-    background: rgba(255 255 255 / 0.05);
-    border-left: 2px solid #ff6600;
-    margin-top: 8px;
+    position: relative !important;
+    margin-top: 16px;
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(26px);
+    -webkit-backdrop-filter: blur(26px);
+    border: 0 !important;
+    padding: 16px;
+    z-index: 1000;
+    border-radius: 12px;
+    transform: translateZ(0);
+    will-change: transform;
   }
 
   .dropdown-item {
@@ -158,8 +176,13 @@ export default {
     color: #fff;
   }
 
-  .dropdown-item:hover {
-    background: rgba(255, 255, 255, 0.1);
+  .arrow {
+    display: inline-block;
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+    font-size: 12px;
+    user-select: none;
+    color: #fff;
   }
 
   .order-button {
@@ -181,28 +204,52 @@ export default {
 }
 
 /* --- Десктоп --- */
+.menu-item-wrapper {
+  position: relative;
+}
+
 .menu-item {
   padding: 8px 16px 12px 16px;
   border-radius: 12px;
   cursor: pointer;
   transition: var(--transition-base);
   position: relative;
+  z-index: 10;
 }
 
 .menu-item:hover {
   background: rgba(195, 195, 195, 0.3);
 }
 
-.dropdown {
+/* Invisible bridge to keep hover active */
+.menu-item-wrapper::before {
+  content: '';
   position: absolute;
   top: 100%;
   left: 0;
-  background: rgba(0, 0, 0, 0.6);
+  right: 0;
+  height: 12px; /* Same as the gap */
+  z-index: 9998;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 12px); /* Add 12px gap */
+  left: 0;
+  background: rgba(42, 40, 65, 0.7);
+  backdrop-filter: blur(26px);
+  -webkit-backdrop-filter: blur(26px);
   border-radius: 12px;
   min-width: 180px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  padding: 16px 0 8px 0;
-  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 16px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .dropdown-item {
@@ -210,10 +257,11 @@ export default {
   color: #fff;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  border-radius: 8px;
 }
 
 .dropdown-item:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(47, 66, 129, 1);
 }
 
 .order-button {

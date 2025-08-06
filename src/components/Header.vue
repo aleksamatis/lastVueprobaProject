@@ -1,28 +1,19 @@
 <script setup>
-import { ref } from 'vue'
 import Logo from '../assets/Logo.svg'
 import majesticons_arrow from '../assets/majesticons_arrow.svg'
-import backgroundImg from '@/assets/background.png'
 import Menu from '@/components/Menu.vue'
-
-const isMenuOpen = ref(false)
-
-function toggleMenu() {
-  isMenuOpen.value = !isMenuOpen.value
-}
 </script>
 
 <template>
   <header class="header">
     <img src="@/assets/background.png" alt="Background" class="header-background" />
     <div class="menu">
+      <div class="menu-backdrop"></div>
       <div class="menu-container container">
         <div class="flex">
           <img :src="Logo" alt="Логотип" class="logo" />
           <!-- Передаем isOpen и слушаем событие toggle-menu -->
-          <Menu :isOpen="isMenuOpen" @toggle-menu="toggleMenu" />
-          <!-- Мобильная кнопка Заказать вне Menu, видна только на мобилках -->
-          <button class="menu-btn mobile-only">Заказать</button>
+          <Menu />
         </div>
         <!-- Десктопная кнопка Заказать -->
         <button class="menu-btn desktop-only">Заказать</button>
@@ -72,8 +63,18 @@ function toggleMenu() {
 }
 
 .menu {
-  background: rgba(15, 54, 131, 0.24);
+  position: relative;
+  z-index: 100;
+}
+
+.menu-backdrop {
+  position: absolute;
   backdrop-filter: blur(12px);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .menu-container {
@@ -81,11 +82,13 @@ function toggleMenu() {
   gap: 20px;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 0;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 .logo {
   margin-right: 80px;
+  z-index: 10;
 }
 
 /* Кнопка Заказать общие стили */
@@ -100,24 +103,33 @@ function toggleMenu() {
 }
 
 /* Мобильная кнопка - скрыта по умолчанию */
-.menu-btn.mobile-only {
+.mobile-only {
   display: none;
 }
 
 /* Показываем мобильную кнопку только на экранах <=768px */
 @media (max-width: 768px) {
-  .menu-btn.mobile-only {
+  .mobile-only {
     display: block;
   }
   /* Прячем десктопную кнопку на мобилках */
-  .menu-btn.desktop-only {
+  .desktop-only {
     display: none;
   }
-}
 
-/* Десктопная кнопка видна по умолчанию */
-.menu-btn.desktop-only {
-  display: inline-block;
+  .menu-container {
+    padding-top: 17px;
+    padding-right: 36px;
+    padding-bottom: 17px;
+    padding-left: 36px;
+    border-bottom-width: 1px;
+    max-width: none;
+  }
+
+  .menu-container > div {
+    flex-grow: 1;
+    justify-content: space-between;
+  }
 }
 
 .menu > button {
@@ -138,6 +150,7 @@ function toggleMenu() {
     linear-gradient(312.56deg, rgba(0, 0, 0, 0.3) 0%, rgba(36, 84, 91, 0.3) 100%);
   box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.15) inset;
   backdrop-filter: blur(28px);
+  z-index: 1;
 }
 
 .text-logo {
@@ -178,5 +191,23 @@ function toggleMenu() {
 .cut-element-arrow {
   width: 24px;
   height: 18px;
+}
+
+@media screen and (max-width: 768px) {
+  .header-item {
+    max-width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    left: 32px;
+    right: 32px;
+    font-size: 24px;
+    font-weight: 400;
+  }
+
+  .text-logo {
+    font-size: 38px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
 }
 </style>

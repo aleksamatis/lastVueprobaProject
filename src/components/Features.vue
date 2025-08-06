@@ -10,19 +10,19 @@ import animationVideo from '../assets/0a61daabaac3bc985419738ca25ba823b3fd350e.g
         <div class="di-3">Наши системы пользуются доверием</div>
       </div>
       <div>
-        <div class="di-1">4000+</div>
-        <div class="di-2">Покупателей</div>
-        <div class="di-3">Наши системы пользуются доверием</div>
+        <div class="di-1">100%</div>
+        <div class="di-2">Гарантия</div>
+        <div class="di-3">Вы точно не ошибётесь выбрав EN-SOFT</div>
       </div>
       <div>
-        <div class="di-1">4000+</div>
-        <div class="di-2">Покупателей</div>
-        <div class="di-3">Наши системы пользуются доверием</div>
+        <div class="di-1">100 тыс.</div>
+        <div class="di-2">Довольных пользователей</div>
+        <div class="di-3">Более 100 тыс. человек в компаниях используют наши системы</div>
       </div>
       <div>
-        <div class="di-1">4000+</div>
-        <div class="di-2">Покупателей</div>
-        <div class="di-3">Наши системы пользуются доверием</div>
+        <div class="di-1">200+</div>
+        <div class="di-2">Отзывов</div>
+        <div class="di-3">We’re proud of our 5-star rating with over 200 reviews.</div>
       </div>
     </div>
     <div class="video-wrapper">
@@ -58,14 +58,19 @@ import animationVideo from '../assets/0a61daabaac3bc985419738ca25ba823b3fd350e.g
 }
 .features {
   display: flex;
-  padding: 20px;
+  gap: 96px;
 }
+
+.features > div {
+  flex: 1 1;
+}
+
 .detailed-information {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Две колонки */
   gap: 24px;
-  max-width: 50%;
   flex-shrink: 0;
+  align-items: center;
 }
 .video-wrapper {
   flex-grow: 1; /* занимает всё оставшееся место */
@@ -79,10 +84,20 @@ import animationVideo from '../assets/0a61daabaac3bc985419738ca25ba823b3fd350e.g
   object-fit: cover;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+  .features {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 375px) {
   .detailed-information {
     grid-template-columns: 1fr; /* Одна колонка на мобильных */
     max-width: 100%;
+  }
+
+  .features {
+    display: block;
   }
 }
 </style>
