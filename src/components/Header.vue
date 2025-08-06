@@ -1,8 +1,17 @@
 <script setup>
+import { ref } from 'vue'
 import Logo from '../assets/Logo.svg'
 import majesticons_arrow from '../assets/majesticons_arrow.svg'
+import backgroundImg from '@/assets/background.png'
 import Menu from '@/components/Menu.vue'
+
+const isMenuOpen = ref(false)
+
+function toggleMenu() {
+  isMenuOpen.value = !isMenuOpen.value
+}
 </script>
+
 <template>
   <header class="header">
     <img src="@/assets/background.png" alt="Background" class="header-background" />
@@ -10,9 +19,13 @@ import Menu from '@/components/Menu.vue'
       <div class="menu-container container">
         <div class="flex">
           <img :src="Logo" alt="Логотип" class="logo" />
-          <Menu />
+          <!-- Передаем isOpen и слушаем событие toggle-menu -->
+          <Menu :isOpen="isMenuOpen" @toggle-menu="toggleMenu" />
+          <!-- Мобильная кнопка Заказать вне Menu, видна только на мобилках -->
+          <button class="menu-btn mobile-only">Заказать</button>
         </div>
-        <button class="menu-btn">Заказать</button>
+        <!-- Десктопная кнопка Заказать -->
+        <button class="menu-btn desktop-only">Заказать</button>
       </div>
     </div>
     <div class="container">
@@ -47,12 +60,12 @@ import Menu from '@/components/Menu.vue'
   width: 100%;
   height: 100%;
   object-fit: cover;
-  top: 0px;
+  top: 0;
 
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 76.58%),
     url(@/assets/background.png);
-  border-radius: 0px 0px 34px 34px;
+  border-radius: 0 0 34px 34px;
   mix-blend-mode: normal;
   opacity: 0.4;
   backdrop-filter: blur(12px);
@@ -65,7 +78,6 @@ import Menu from '@/components/Menu.vue'
 
 .menu-container {
   display: flex;
-
   gap: 20px;
   align-items: center;
   justify-content: space-between;
@@ -76,8 +88,36 @@ import Menu from '@/components/Menu.vue'
   margin-right: 80px;
 }
 
+/* Кнопка Заказать общие стили */
 .menu-btn {
   color: white;
+  background-color: #1a22d3;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* Мобильная кнопка - скрыта по умолчанию */
+.menu-btn.mobile-only {
+  display: none;
+}
+
+/* Показываем мобильную кнопку только на экранах <=768px */
+@media (max-width: 768px) {
+  .menu-btn.mobile-only {
+    display: block;
+  }
+  /* Прячем десктопную кнопку на мобилках */
+  .menu-btn.desktop-only {
+    display: none;
+  }
+}
+
+/* Десктопная кнопка видна по умолчанию */
+.menu-btn.desktop-only {
+  display: inline-block;
 }
 
 .menu > button {
@@ -89,18 +129,17 @@ import Menu from '@/components/Menu.vue'
   color: white;
   top: 50%;
   max-width: 734px;
-  padding: 120px 24px 24px 24px;
+  padding: 24px;
   box-sizing: border-box;
   border-radius: 34px;
 
   background:
     linear-gradient(0deg, rgba(25, 25, 61, 0.4), rgba(25, 25, 61, 0.4)),
     linear-gradient(312.56deg, rgba(0, 0, 0, 0.3) 0%, rgba(36, 84, 91, 0.3) 100%);
-
   box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.15) inset;
-
   backdrop-filter: blur(28px);
 }
+
 .text-logo {
   font-weight: 700;
   font-style: Bold;

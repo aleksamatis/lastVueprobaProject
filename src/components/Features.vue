@@ -61,10 +61,10 @@ import animationVideo from '../assets/0a61daabaac3bc985419738ca25ba823b3fd350e.g
   padding: 20px;
 }
 .detailed-information {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Две колонки */
+  gap: 24px;
   max-width: 50%;
-  flex-wrap: wrap;
-  /* фиксируем ширину */
   flex-shrink: 0;
 }
 .video-wrapper {
@@ -77,5 +77,12 @@ import animationVideo from '../assets/0a61daabaac3bc985419738ca25ba823b3fd350e.g
   height: 600px; /* фиксированная высота */
   display: block;
   object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .detailed-information {
+    grid-template-columns: 1fr; /* Одна колонка на мобильных */
+    max-width: 100%;
+  }
 }
 </style>
