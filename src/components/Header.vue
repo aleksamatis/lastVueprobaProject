@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import Logo from '../assets/Logo.svg'
 import majesticons_arrow from '../assets/majesticons_arrow.svg'
 import Menu from '@/components/Menu.vue'
@@ -75,6 +75,7 @@ import Menu from '@/components/Menu.vue'
   right: 0;
   bottom: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  z-index: -1;
 }
 
 .menu-container {
