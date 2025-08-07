@@ -1,44 +1,46 @@
 <template>
-  <footer class="footer">
-    <div class="footer-col footer-col-1">
-      <div class="footer-sub-1">
-        <img :src="Logo" alt="Логотип" class="logo" />
-        <div>
-          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-          unknown printer took a galley of type and scrambled
+  <footer class="footer-container">
+    <div class="footer container">
+      <div class="footer-col footer-col-1 footer-logo">
+        <div class="footer-sub-1">
+          <img :src="Logo" alt="Логотип" class="logo" />
+          <div>
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+            unknown printer took a galley of type and scrambled
+          </div>
         </div>
-      </div>
-      <div class="footer-sub-2">
         <div class="footer-sub-2">
-          <div class="contacts-title">контакты</div>
-          <a href="tel:+74955406141" class="footer-hover-2">+7 (495) 540-61-41</a>
-          <a href="tel:+78002226141" class="footer-hover-2">+7 (800) 222-61-41</a>
-          <a href="mailto:info@chint.ru" class="footer-hover-2">info@chint.ru</a>
-          <a href="#" class="footer-hover-2">Ул. Автозаводская, дом 23 А, К2</a>
+          <div class="footer-sub-2">
+            <div class="contacts-title">контакты</div>
+            <a href="tel:+74955406141" class="footer-hover-2">+7 (495) 540-61-41</a>
+            <a href="tel:+78002226141" class="footer-hover-2">+7 (800) 222-61-41</a>
+            <a href="mailto:info@chint.ru" class="footer-hover-2">info@chint.ru</a>
+            <div>Ул. Автозаводская, дом 23 А, К2</div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="footer-col">
-      <div class="section-title">КОМПАНИЯ</div>
-      <a href="#" class="footer-hover-1">О компании</a>
-      <a href="#" class="footer-hover-1">Заказы</a>
-      <a href="#" class="footer-hover-1">Контакты</a>
-    </div>
+      <div class="footer-col">
+        <div class="section-title">КОМПАНИЯ</div>
+        <a href="#" class="footer-hover-1"><span>О компании</span></a>
+        <a href="#" class="footer-hover-1"><span>Заказы</span></a>
+        <a href="#" class="footer-hover-1"><span>Контакты</span></a>
+      </div>
 
-    <div class="footer-col">
-      <div class="section-title">ПРОДУКТЫ</div>
-      <a href="#" class="footer-hover-1">EN-Safety suite</a>
-      <a href="#" class="footer-hover-1">EN-Soft Advance Alarm Managmen</a>
-      <a href="#" class="footer-hover-1">EN-Soft AMS</a>
-      <a href="#" class="footer-hover-1">EN-Soft Batch</a>
-      <a href="#" class="footer-hover-1">EN-Soft CHAMS</a>
-      <a href="#" class="footer-hover-1">EN-Soft EPG DCG</a>
+      <div class="footer-col">
+        <div class="section-title">ПРОДУКТЫ</div>
+        <a href="#" class="footer-hover-1"><span>EN-Safety suite</span></a>
+        <a href="#" class="footer-hover-1"><span>EN-Soft Advance Alarm Managmen</span></a>
+        <a href="#" class="footer-hover-1"><span>EN-Soft AMS</span></a>
+        <a href="#" class="footer-hover-1"><span>EN-Soft Batch</span></a>
+        <a href="#" class="footer-hover-1"><span>EN-Soft CHAMS</span></a>
+        <a href="#" class="footer-hover-1"><span>EN-Soft EPG DCG</span></a>
+      </div>
     </div>
   </footer>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import Logo from '../assets/Logo.svg'
 </script>
 
@@ -47,15 +49,21 @@ import Logo from '../assets/Logo.svg'
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 20px;
-  padding: 20px;
   color: white;
-  background-color: #000237;
+  background-image: url('@/assets/footer-background.svg');
+  background-position: top;
+}
+
+.footer-container {
+  background: rgba(0, 2, 55, 1);
+  border-radius: 34px 34px 0 0;
+  padding-top: 120px;
 }
 
 /* Первая колонка делится на две строки */
 .footer-col-1 {
-  display: grid;
-  grid-template-rows: auto auto;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
@@ -68,9 +76,8 @@ import Logo from '../assets/Logo.svg'
   padding-right: 50px;
 }
 
-.logo img {
-  width: 200px;
-  height: 200px;
+.logo {
+  height: 60px;
 }
 
 /* Контакты — вертикальный список */
@@ -88,24 +95,26 @@ import Logo from '../assets/Logo.svg'
 }
 
 .footer-col {
-  border-radius: 4px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 20px;
 }
 
 .footer-hover-1 {
   color: white;
   font-size: 14px;
-  padding: 12px 0px;
-  display: inline-block; /* чтобы padding влиял */
-  border-radius: 4px;
   text-decoration: none;
   transition: background-color 0.3s ease;
   cursor: pointer;
 }
 
-.footer-hover-1:hover {
+.footer-hover-1 span {
+  padding: 12px 7px;
+  border-radius: 8px;
+}
+
+.footer-hover-1 span:hover {
   background: rgba(47, 66, 129, 1);
   color: white;
 }
@@ -126,8 +135,13 @@ import Logo from '../assets/Logo.svg'
 /* --- Адаптив --- */
 @media (max-width: 768px) {
   .footer {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: repeat(2, 1fr); /* два столбца */
+    grid-auto-rows: auto;
+    row-gap: 40px;
+  }
+
+  .footer-logo {
+    grid-column: 1 / -1; /* логотип занимает всю ширину */
   }
 
   /* Первая колонка — логотип+текст сверху, контакты снизу, оба вертикально */
