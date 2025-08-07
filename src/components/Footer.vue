@@ -22,19 +22,19 @@
 
       <div class="footer-col">
         <div class="section-title">КОМПАНИЯ</div>
-        <a href="#" class="footer-hover-1"><span>О компании</span></a>
-        <a href="#" class="footer-hover-1"><span>Заказы</span></a>
-        <a href="#" class="footer-hover-1"><span>Контакты</span></a>
+        <a href="#" class="footer-hover-1"><div>О компании</div></a>
+        <a href="#" class="footer-hover-1"><div>Заказы</div></a>
+        <a href="#" class="footer-hover-1"><div>Контакты</div></a>
       </div>
 
       <div class="footer-col">
         <div class="section-title">ПРОДУКТЫ</div>
-        <a href="#" class="footer-hover-1"><span>EN-Safety suite</span></a>
-        <a href="#" class="footer-hover-1"><span>EN-Soft Advance Alarm Managmen</span></a>
-        <a href="#" class="footer-hover-1"><span>EN-Soft AMS</span></a>
-        <a href="#" class="footer-hover-1"><span>EN-Soft Batch</span></a>
-        <a href="#" class="footer-hover-1"><span>EN-Soft CHAMS</span></a>
-        <a href="#" class="footer-hover-1"><span>EN-Soft EPG DCG</span></a>
+        <a href="#" class="footer-hover-1"><div>EN-Safety suite</div></a>
+        <a href="#" class="footer-hover-1"><div>EN-Soft Advance Alarm Managmen</div></a>
+        <a href="#" class="footer-hover-1"><div>EN-Soft AMS</div></a>
+        <a href="#" class="footer-hover-1"><div>EN-Soft Batch</div></a>
+        <a href="#" class="footer-hover-1"><div>EN-Soft CHAMS</div></a>
+        <a href="#" class="footer-hover-1"><div>EN-Soft EPG DCG</div></a>
       </div>
     </div>
   </footer>
@@ -109,12 +109,12 @@ import Logo from '../assets/Logo.svg'
   cursor: pointer;
 }
 
-.footer-hover-1 span {
+.footer-hover-1 div {
   padding: 12px 7px;
   border-radius: 8px;
 }
 
-.footer-hover-1 span:hover {
+.footer-hover-1 div:hover {
   background: rgba(47, 66, 129, 1);
   color: white;
 }
