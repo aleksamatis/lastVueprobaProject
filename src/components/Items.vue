@@ -28,6 +28,10 @@ const items = [
 
 <template>
   <section class="main">
+    <div class="items-recomendation container">
+      <div class="r-txt">РЕКОМЕНДУЕМ</div>
+      <button class="r-btn">Посмотреть все</button>
+    </div>
     <div class="detailed-items container">
       <div v-for="(item, index) in items" :key="index" class="di-1">
         <img :src="item.picture" alt="Item image" />
@@ -48,7 +52,21 @@ const items = [
   padding-bottom: 80px;
   background: linear-gradient(180deg, #4050aa 0%, #0f1a58 100%);
 }
-
+.items-recomendation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+}
+.r-btn {
+  background: rgba(195, 195, 195, 0.3);
+  white-space: nowrap;
+}
+.r-txt {
+  font-weight: 600;
+  font-size: 36px;
+  color: #9baafc;
+}
 .detailed-items {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -95,6 +113,18 @@ const items = [
     grid-template-columns: 1fr;
     max-width: 100%;
     row-gap: 40px;
+  }
+  .r-txt {
+    font-size: 20px;
+  }
+}
+@media (max-width: 375px) {
+  .items-recomendation {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
   }
 }
 </style>

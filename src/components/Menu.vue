@@ -189,17 +189,12 @@ onBeforeUnmount(() => {
     margin: 8px 32px;
     padding: 10px 0;
     width: calc(100% - 64px);
-    background-color: #ff6600;
     border: none;
     border-radius: 8px;
     color: white;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-
-  .order-button:hover {
-    background-color: #e65500;
   }
 }
 
@@ -267,7 +262,6 @@ onBeforeUnmount(() => {
 .order-button {
   margin: 8px 16px;
   padding: 10px 20px;
-  background-color: #ff6600;
   border: none;
   border-radius: 8px;
   color: white;
@@ -276,9 +270,5 @@ onBeforeUnmount(() => {
   transition: background-color 0.3s ease;
   width: calc(100% - 32px);
   text-align: center;
-}
-
-.order-button:hover {
-  background-color: #e65500;
 }
 </style>

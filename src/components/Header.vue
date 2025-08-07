@@ -201,7 +201,7 @@ import Menu from '@/components/Menu.vue'
     border-radius: 16px;
     left: 32px;
     right: 32px;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 400;
   }
 

@@ -90,14 +90,20 @@ import animationVideo from '../assets/0a61daabaac3bc985419738ca25ba823b3fd350e.g
   }
 }
 
+@media (max-width: 768px) {
+  .features {
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 375px) {
   .detailed-information {
-    grid-template-columns: 1fr; /* Одна колонка на мобильных */
+    grid-template-columns: 1fr;
     max-width: 100%;
   }
 
-  .features {
-    display: block;
+  .di-1 {
+    font-size: 40px;
   }
 }
 </style>
