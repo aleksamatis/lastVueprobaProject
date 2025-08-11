@@ -52,12 +52,13 @@ import Logo from '../assets/Logo.svg'
   color: white;
   background-image: url('@/assets/footer-background.svg');
   background-position: top;
+  padding-bottom: 40px ;
 }
 
 .footer-container {
   background: rgba(0, 2, 55, 1);
   border-radius: 34px 34px 0 0;
-  padding-top: 120px;
+  padding-top: 120px;  
 }
 
 /* Первая колонка делится на две строки */
